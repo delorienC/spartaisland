@@ -20,12 +20,3 @@ RUN apt-get update && \
   npm \
   composer \
   && apt-get clean
-
-# Setze die Standard-Arbeitsverzeichnis
-#WORKDIR /var/www
-
-# Ports für Laravel verfügbar machen
-#EXPOSE 8000
-
-# Befehl zum Starten des Laravel-Projekts (Ändere es nach Bedarf)
-#CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
