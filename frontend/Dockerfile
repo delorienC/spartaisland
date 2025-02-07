@@ -1,9 +1,15 @@
-FROM node:23-alpine AS builder
+FROM node:latest
 
 WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .
-RUN npm run build
+
+# Expose port for React development server
+EXPOSE 3000
+
+# Start the development server
+CMD ["npm", "run", "dev"]

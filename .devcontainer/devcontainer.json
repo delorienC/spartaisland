@@ -3,15 +3,11 @@
   "dockerComposeFile": "./docker-compose.yml",
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  ],
   "customizations": {
     "vscode": {
-      "settings": {
-        "php.validate.enable": true,
-        "php.suggest.basic": true,
-        "editor.formatOnSave": true,
-        "php.validate.executablePath": "/usr/local/bin/php",
-        "intelephense.environment.phpExecutable": "/usr/local/bin/php"
-      },
       "extensions": [
         "adrianwilczynski.alpine-js-intellisense",
         "bmewburn.vscode-intelephense-client",

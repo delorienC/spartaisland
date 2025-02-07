@@ -34,10 +34,13 @@ COPY . .
 # Expose port
 EXPOSE 9000
 
-# Start PHP-FPM
-CMD ["php-fpm"]
-
 # Set permissions
 RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
   && chown -R www-data:www-data /var/www/html \
   && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Expose port for React development server
+EXPOSE 3000
+
+# Start the development server
+CMD ["php-fpm"]
