@@ -3,9 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ../backend:/workspace/backend:cached
-      - ../frontend:/workspace/frontend:cached
     working_dir: /workspace
     networks:
       - fscs-network
