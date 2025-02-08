@@ -40,8 +40,15 @@ services:
       - DB_DATABASE=laravel
       - DB_USERNAME=fscs
       - DB_PASSWORD=fscs
+      - MONGO_DB_CONNECTION=mongodb
+      - MONGO_DB_HOST=mongodb
+      - MONGO_DB_PORT=27017
+      - MONGO_DB_DATABASE=fscs
+      - MONGO_DB_USERNAME=fscs
+      - MONGO_DB_PASSWORD=fscs
     depends_on:
       - mysql
+      - mongodb
     networks:
       - fscs-network
 
@@ -128,7 +135,7 @@ services:
     networks:
       - fscs-network
     depends_on:
-      - mongodb # Warten auf MongoDB vor dem Start
+      - mongodb 
 
 networks:
   fscs-network:
