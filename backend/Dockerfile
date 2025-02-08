@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
   default-mysql-client \
   && docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip intl opcache xsl xml zip
 COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
-COPY ./ .
+COPY . .
 EXPOSE 9000
 RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
   && chown -R www-data:www-data /var/www/html \

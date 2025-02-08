@@ -9,9 +9,20 @@ services:
     stdin_open: true
     tty: true
     command: tail -f /dev/null
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=laravel
+      - DB_USERNAME=fscs
+      - DB_PASSWORD=fscs
+      - MONGO_INITDB_DATABASE= mongodb
+      - MONGO_INITDB_ROOT_USERNAME= fscs
+      - MONGO_INITDB_ROOT_PASSWORD= fscs
     depends_on:
       - laravel
       - react
+      - mysql
+      - mongodb
 
   laravel:
     build:
@@ -34,7 +45,7 @@ services:
     networks:
       - fscs-network
 
-    laravel-nginx:
+  laravel-nginx:
     image: nginx:alpine
     ports:
       - "81:80"
@@ -91,6 +102,33 @@ services:
       - mysql
     networks:
       - fscs-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: fscs
+      MONGO_INITDB_ROOT_USERNAME: fscs
+      MONGO_INITDB_ROOT_PASSWORD: fscs
+    networks:
+      - fscs-network
+
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: fscs
+      ME_CONFIG_MONGODB_ADMINPASSWORD: fscs
+      ME_CONFIG_BASICAUTH_USERNAME: fscs
+      ME_CONFIG_BASICAUTH_PASSWORD: fscs
+      ME_CONFIG_BASICAUTH: false
+    networks:
+      - fscs-network
+    depends_on:
+      - mongodb # Warten auf MongoDB vor dem Start
 
 networks:
   fscs-network:
