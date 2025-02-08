@@ -1,9 +1,5 @@
 FROM php:8.4-fpm
-
-# Set working directory
 WORKDIR /var/www/html
-
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
   curl \
   git \
@@ -24,23 +20,11 @@ RUN apt-get update && apt-get install -y \
   libmemcached-dev \
   default-mysql-client \
   && docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip intl opcache xsl xml zip
-
-# Install Composer
 COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
-
-# Copy existing application directory contents
-COPY . .
-
-# Expose port
+COPY ./ .
 EXPOSE 9000
-
-# Set permissions
 RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
   && chown -R www-data:www-data /var/www/html \
   && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Expose port for React development server
 EXPOSE 3000
-
-# Start the development server
 CMD ["php-fpm"]

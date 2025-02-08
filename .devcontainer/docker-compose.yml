@@ -34,8 +34,7 @@ services:
     networks:
       - fscs-network
 
-  # Nginx Server
-  laravel-nginx:
+    laravel-nginx:
     image: nginx:alpine
     ports:
       - "81:80"

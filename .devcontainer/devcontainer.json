@@ -8,40 +8,7 @@
   ],
   "customizations": {
     "vscode": {
-      "extensions": [
-        "adrianwilczynski.alpine-js-intellisense",
-        "bmewburn.vscode-intelephense-client",
-        "bradlc.vscode-tailwindcss",
-        "codeium.codeium",
-        "dbaeumer.vscode-eslint",
-        "devsense.composer-php-vscode",
-        "devsense.intelli-php-vscode",
-        "devsense.phptools-vscode",
-        "devsense.profiler-php-vscode",
-        "donjayamanne.githistory",
-        "ecmel.vscode-html-css",
-        "entuent.fira-code-nerd-font",
-        "esbenp.prettier-vscode",
-        "github.copilot",
-        "github.copilot-chat",
-        "github.vscode-pull-request-github",
-        "intellsmi.comment-translate",
-        "jock.svg",
-        "junstyle.php-cs-fixer",
-        "laravel.vscode-laravel",
-        "mrmlnc.vscode-apache",
-        "ms-azuretools.vscode-docker",
-        "ms-ceintl.vscode-language-pack-de",
-        "naumovs.color-highlight",
-        "onecentlin.laravel-blade",
-        "porifa.laravel-intelephense",
-        "postman.postman-for-vscode",
-        "recca0120.vscode-phpunit",
-        "shufo.vscode-blade-formatter",
-        "streetsidesoftware.code-spell-checker",
-        "streetsidesoftware.code-spell-checker-german",
-        "xdebug.php-debug"
-      ]
+      "extensions": []
     }
   }
 }

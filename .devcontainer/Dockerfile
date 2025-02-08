@@ -1,6 +1,5 @@
 FROM ubuntu:latest
 
-# System aktualisieren und benötigte Pakete installieren
 RUN apt-get update && \
   apt-get install -y \
   php \
