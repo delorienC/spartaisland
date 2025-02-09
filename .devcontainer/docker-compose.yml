@@ -21,6 +21,7 @@ services:
     depends_on:
       - laravel
       - react
+      - tailadmin
       - mysql
       - mongodb
 
@@ -85,6 +86,27 @@ services:
     networks:
       - fscs-network
 
+  tailadmin:
+    build:
+      context: ../tailadmin
+      dockerfile: Dockerfile
+    volumes:
+      - ../tailadmin:/usr/share/nginx/html
+    networks:
+      - fscs-network
+
+  tailadmin-nginx:
+    image: nginx:alpine
+    volumes:
+      - ./tailadmin/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../tailadmin/:/usr/share/nginx/html/
+    depends_on:
+      - tailadmin
+    ports:
+      - "83:80"
+    networks:
+      - fscs-network
+
   mysql:
     image: mysql:latest
     ports:
@@ -135,7 +157,7 @@ services:
     networks:
       - fscs-network
     depends_on:
-      - mongodb 
+      - mongodb
 
 networks:
   fscs-network:
