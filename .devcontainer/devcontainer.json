@@ -40,7 +40,8 @@
         "shufo.vscode-blade-formatter",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-german",
-        "xdebug.php-debug"
+        "xdebug.php-debug",
+        "NarasimaPandiyan.jetbrainsmono"
       ]
     }
   }
