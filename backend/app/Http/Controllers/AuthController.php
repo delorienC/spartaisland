@@ -22,9 +22,19 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken('API Token')->plainTextToken;
 
+        // password after seed is password
         return response()->json([
             'message' => 'Login successful',
             'token' => $token,
+        ]);
+    }
+    public function logout(Request $request)
+    {
+        // Widerruft den aktuellen Token des Benutzers
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Successfully logged out'
         ]);
     }
 }
