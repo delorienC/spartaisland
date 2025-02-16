@@ -1,17 +1,21 @@
 import { useState } from "react";
 
 const loginUser = async (email: string, password: string) => {
-  const response = await fetch("http://localhost:81/api/login", {
-    method: "POST",
-    credentials: "include", // Important for Laravel Sanctum
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-
-  if (!response.ok) {
-    return { error: "Invalid credentials" };
+  try {
+    const response = await fetch("http://localhost:81/api/login", {
+      method: "POST",
+      credentials: "include", // Important for Laravel Sanctum
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    if (!response.ok) {
+      return { error: "Invalid credentials" };
+    }
+    return { success: "Login successful" };
+  } catch (error) {
+    console.error("Error logging in:", error);
+    return { error: "An error occurred while trying to log in" };
   }
-  return { success: "Login successful" };
 };
 
 export default function Login() {
