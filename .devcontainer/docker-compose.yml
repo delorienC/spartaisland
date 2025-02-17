@@ -19,6 +19,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME= fscs
       - MONGO_INITDB_ROOT_PASSWORD= fscs
     depends_on:
+      - laravel-nginx
+      - react-nginx
       - laravel
       - react
       - mysql

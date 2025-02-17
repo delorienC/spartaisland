@@ -40,82 +40,60 @@ export default function Login() {
   };
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            alt="Your Company"
-            src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
-          />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
+      <div className="hero bg-base-200 min-h-screen">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <h1 className="text-5xl font-bold">Login</h1>
+            <div className="card-body">
+              <form onSubmit={handleLogin}>
+                <fieldset className="fieldset">
+                  <label
+                    className="fieldset-label"
+                    form="email">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={email} onChange={(e) => setEmail(e.target.value)}
+                    className="input"
+                    placeholder="Email" />
+                  <label
+                    className="fieldset-label"
+                    form="password">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    value={password} onChange={(e) => setPassword(e.target.value)}
+                    className="input"
+                    placeholder="Password" />
+                  <div>
+                    <a className="link link-hover">
+                      Forgot password?
+                    </a>
+                  </div>
+                  <div>
+                    {status && <p>{status}</p>}
+                  </div>
+                  <button
+                    type="submit"
+                    className="btn btn-neutral mt-4"
+                    disabled={loading}>
+                    {loading ? "Logging in..." : "Login"}
+                  </button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
         </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={email} onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-                  Password
-                </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  value={password} onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                disabled={loading}
-              >
-                {loading ? "Logging in..." : "Login"}
-              </button>
-            </div>
-          </form>
-          {status && <p>{status}</p>}
-          <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Start a 14 day free trial
-            </a>
-          </p>
-        </div>
-      </div >
+      </div>
     </>
   )
 }
