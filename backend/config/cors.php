@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:82'],
+    'allowed_origins' => ['https://localhost:444'],
 
     'allowed_origins_patterns' => [],
 

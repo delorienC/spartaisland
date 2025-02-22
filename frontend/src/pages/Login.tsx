@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthController } from "../controller/AuthController";
 
 const loginUser = async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:81/api/login", {
+    const response = await fetch("https://localhost:443/api/login", {
       method: "POST",
       credentials: "include", // Important for Laravel Sanctum
       headers: { "Content-Type": "application/json" },
@@ -11,14 +13,21 @@ const loginUser = async (email: string, password: string) => {
     if (!response.ok) {
       return { error: "Invalid credentials" };
     }
+    const data = await response.json();
+    localStorage.setItem("token", data.token);
     return { success: "Login successful" };
   } catch (error) {
-    console.error("Error logging in:", error);
-    return { error: "An error occurred while trying to log in" };
+    return { error: "An error occurred while trying to log in " + error };
   }
 };
 
 export default function Login() {
+  //useAuthController();
+  const navigate = useNavigate();
+  if (useAuthController()) {
+    //navigate("/admin-panel");
+    console.log("Already authenticated, redirecting to admin panel");
+  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,13 +36,13 @@ export default function Login() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     const result = await loginUser(email, password);
 
     if (result.error) {
       setStatus(result.error);
     } else {
       setStatus(result.success ?? null);
+      navigate("/admin-panel");
     }
 
     setLoading(false);
@@ -49,7 +58,7 @@ export default function Login() {
                 <fieldset className="fieldset">
                   <label
                     className="fieldset-label"
-                    form="email">
+                    htmlFor="email">
                     Email
                   </label>
                   <input
@@ -63,7 +72,7 @@ export default function Login() {
                     placeholder="Email" />
                   <label
                     className="fieldset-label"
-                    form="password">
+                    htmlFor="password">
                     Password
                   </label>
                   <input
