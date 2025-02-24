@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthController } from "../controller/AuthController";
 
@@ -22,7 +22,7 @@ const loginUser = async (email: string, password: string) => {
 };
 
 export default function Login() {
-  //useAuthController();
+  useAuthController();
   const navigate = useNavigate();
   if (useAuthController()) {
     //navigate("/admin-panel");

@@ -39,10 +39,11 @@ class AuthController extends Controller
         $refreshToken = $request->cookie('refresh_token');
         $isAuthenticated = Auth::check();
         if (!$refreshToken) {
-            if ($request->user()) {
-                $request->user()->currentAccessToken()->delete();
-            }
-            return response()->json();
+            $isAuthenticated = Auth::logout();
+            return response()->json([
+                'authenticated' => 'false',
+                'refresh_token' => 'false'
+            ]);
         }
         return response()->json([
             'authenticated' => $isAuthenticated,
