@@ -36,17 +36,13 @@ class AuthController extends Controller
 
     public function is_authenticated(Request $request)
     {
-        $refreshToken = $request->cookie('refresh_token');
-        $isAuthenticated = Auth::check();
-        if (!$refreshToken) {
-            $isAuthenticated = Auth::logout();
-            return response()->json([
-                'authenticated' => 'false',
-                'refresh_token' => 'false'
-            ]);
+        if (!$refreshToken = $request->cookie('refresh_token')) {
+            logger('inside is_authenticated, no refresh token');
+            return response()->json(['error' => 'Invalid credentials'], 401);
         }
+
         return response()->json([
-            'authenticated' => $isAuthenticated,
+            'authenticated' => 'true',
             'refresh_token' => $refreshToken
         ]);
     }

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthController } from "../controller/AuthController";
+import logo from '../assets/adminpanel-logo.png';
+
 
 const loginUser = async (email: string, password: string) => {
   try {
@@ -22,7 +24,6 @@ const loginUser = async (email: string, password: string) => {
 };
 
 export default function Login() {
-  useAuthController();
   const navigate = useNavigate();
   if (useAuthController()) {
     //navigate("/admin-panel");
@@ -50,9 +51,11 @@ export default function Login() {
   return (
     <>
       <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero-content flex-col">
+          <div className="text-center lg:text-left">
+            <img src={logo} alt="Logo" />
+          </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <h1 className="text-5xl font-bold">Login</h1>
             <div className="card-body">
               <form onSubmit={handleLogin}>
                 <fieldset className="fieldset">

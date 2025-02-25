@@ -1,10 +1,16 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useAuthController = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [checked, setChecked] = useState(false);
+
   useEffect(() => {
+    if (checked) return;
+
+    let isMounted = true;
+
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
       try {
@@ -16,24 +22,34 @@ export const useAuthController = () => {
             'Accept': 'application/json'
           },
         });
+
+        if (!isMounted) return;
+
+        if (!response.ok) {
+          throw new Error('Server error');
+        }
+
         const data = await response.json();
-        if (!data.authenticated && location.pathname === '/login') {
-          return null;
+        if (data.authenticated && location.pathname !== '/admin-panel') {
+          navigate('/admin-panel');
         } else if (!data.authenticated && location.pathname !== '/login') {
           navigate('/login');
-        } else if (data.authenticated && location.pathname !== '/login') {
-          return null;
-        } else if (data.authenticated) {
-          navigate('/admin-panel');
-        } else {
+        }
+
+        if (isMounted) setChecked(true);
+      } catch (error) {
+        if (isMounted && location.pathname !== '/login') {
           navigate('/login');
         }
-      } catch (error) {
-        console.error('Error checking authentication:', error);
-        navigate('/login');
       }
     };
+
     checkAuth();
-  }, [navigate, location]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [navigate, location.pathname]);
+
   return null;
 };

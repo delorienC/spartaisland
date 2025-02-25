@@ -28,17 +28,16 @@ export default [
       ],
       "@typescript-eslint/naming-convention": [
         "error",
-        // 🔹 PascalCase für React-Komponenten (z. B. AdminPanel)
         {
           "selector": "function",
           "format": ["PascalCase"],
           "custom": { "regex": "^[A-Z]", "match": true },
           "filter": {
-            "regex": "^(use[A-Z])", // Hooks (useState, useEffect) ausnehmen
+            "regex": "^(use[A-Z])", // Exclude Hooks (useState, useEffect)
             "match": false
           }
         },
-        // 🔹 camelCase für normale Funktionen (z. B. loginUser)
+        // 🔹 camelCase for normal functions (e.g. loginUser)
         {
           "selector": "function",
           "format": ["camelCase"],

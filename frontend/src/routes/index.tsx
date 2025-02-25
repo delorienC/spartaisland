@@ -1,20 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "../index.css";
-import App from "../App";
-import Login from "../pages/Login";
 import PasswordLost from "../pages/PasswordLost";
 import AdminPanel from "../pages/AdminPanel";
+import Login from "../pages/Login";
+
 
 const AppRoutes = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/password-lost" element={<PasswordLost />} />
-        <Route path="/admin-panel" element={<AdminPanel />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/password-lost" element={<PasswordLost />} />
+      <Route path="/admin-panel" element={<AdminPanel />} />
+    </Routes>
   );
 };
 
