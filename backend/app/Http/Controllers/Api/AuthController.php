@@ -19,12 +19,11 @@ class AuthController extends Controller
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
-
         $user = User::firstWhere('email', $request->email);
         $accessToken = $user->createToken('authToken')->plainTextToken;
         $refreshToken = $user->createToken('refreshToken')->plainTextToken;
+        $user->update(['refresh_token' => $refreshToken]);
         $cookie = cookie('refresh_token', $refreshToken, 60 * 24 * 7, '/', null, true, true);
-
         return response()->json(['token' => $accessToken])->withCookie($cookie);
     }
 
@@ -36,14 +35,13 @@ class AuthController extends Controller
 
     public function is_authenticated(Request $request)
     {
-        if (!$refreshToken = $request->cookie('refresh_token')) {
-            logger('inside is_authenticated, no refresh token');
+        $refreshToken = $request->cookie('refresh_token');
+        $user = User::where('refresh_token', $refreshToken)->first();
+        if (!$refreshToken || !$user) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
-
         return response()->json([
-            'authenticated' => 'true',
-            'refresh_token' => $refreshToken
+            'authenticated' => true
         ]);
     }
 }
