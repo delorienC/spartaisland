@@ -37,7 +37,7 @@ export const useAuthController = () => {
         }
 
         if (isMounted) setChecked(true);
-      } catch (error) {
+      } catch {
         if (isMounted && location.pathname !== '/login') {
           navigate('/login');
         }
@@ -49,7 +49,9 @@ export const useAuthController = () => {
     return () => {
       isMounted = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, location.pathname]);
+  //checked is not necessary to re-run this effect on every render
 
   return null;
 };
