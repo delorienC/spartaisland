@@ -2,3 +2,4 @@
 .vscode
 .devcontainer/devcontainer.json
 .phpunit.cache
+.Readme.md
