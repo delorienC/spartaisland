@@ -38,7 +38,8 @@
         "DEVSENSE.phptools-vscode",
         "DEVSENSE.intelli-php-vscode",
         "DEVSENSE.profiler-php-vscode",
-        "DEVSENSE.composer-php-vscode"
+        "DEVSENSE.composer-php-vscode",
+        "damms005.devdb"
       ],
       "settings": {
         "editor.formatOnSave": true,
