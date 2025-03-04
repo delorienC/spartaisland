@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminAuthController extends Controller
 {
-    //
-    use ApiRespones;
     public function login(LoginUserRequest $request)
     {
-        logger()->info("Login request", [$request->all()]);
         $user = AdminUser::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
