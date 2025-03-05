@@ -3,3 +3,4 @@
 .devcontainer/devcontainer.json
 .phpunit.cache
 .Readme.md
+backend/.phpstorm.meta.php
