@@ -2,7 +2,6 @@
 
 test('example', function () {
     $response = $this->get('/');
-
     $response->assertStatus(200);
 });
 
@@ -12,17 +11,24 @@ use Laravel\Sanctum\Sanctum;
 
 it('admin can login with valid credentials', function () {
     $user = AdminUser::factory()->create([
-        'password' => Hash::make('password123'),
+        'email' => 'pestuser@example.com',
+        'password' => Hash::make('password12345678'),
     ]);
 
     $response = $this->postJson('/api/login', [
-        'email' => $user->email,
-        'password' => 'password123',
+        'email' => 'pestuser@example.com',
+        'password' => 'password12345678',
     ]);
 
     $response->assertStatus(200)
         ->assertJsonStructure(['token']);
 });
+
+it('deletes pestuser@example.com from the database', function () {
+    AdminUser::where('email', 'pestuser@example.com')->delete();
+    expect(AdminUser::where('email', 'pestuser@example.com')->exists())->toBeFalse();
+});
+
 
 it('admin cannot login with invalid credentials', function () {
     $response = $this->postJson('/api/login', [
