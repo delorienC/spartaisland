@@ -24,3 +24,4 @@ yarn-error.log
 /.zed
 /.phpstorm.meta.php
 /--filter*
+.debtrac.cache

@@ -1,0 +1,6 @@
+#!/bin/sh
+vendor/bin/deptrac analyse
+if [ $? -ne 0 ]; then
+    echo "Deptrac found violations! Aborting commit."
+    exit 1
+fi

@@ -1,0 +1,93 @@
+deptrac:
+  paths:
+    - ./app
+    - ./tests
+
+  exclude_files:
+    - "#.*test.*#"
+    - "#.*TestCase.*#"
+
+  layers:
+    - name: Controller
+      collectors:
+        - type: classLike
+          value: .*\\\\Http\\\\Controllers\\\\.*
+
+    - name: Middleware
+      collectors:
+        - type: classLike
+          value: .*\\\\Http\\\\Middleware\\\\.*
+
+    - name: Requests
+      collectors:
+        - type: classLike
+          value: .*\\\\Http\\\\Requests\\\\.*
+
+    - name: Services
+      collectors:
+        - type: classLike
+          value: .*\\\\Services\\\\.*
+
+    - name: Repositories
+      collectors:
+        - type: classLike
+          value: .*\\\\Repositories\\\\.*
+
+    - name: Models
+      collectors:
+        - type: classLike
+          value: .*\\\\Models\\\\.*
+
+    - name: DTOs
+      collectors:
+        - type: classLike
+          value: .*\\\\DTOs\\\\.*
+
+    - name: Jobs
+      collectors:
+        - type: classLike
+          value: .*\\\\Jobs\\\\.*
+
+    - name: Events
+      collectors:
+        - type: classLike
+          value: .*\\\\Events\\\\.*
+
+    - name: Listeners
+      collectors:
+        - type: classLike
+          value: .*\\\\Listeners\\\\.*
+
+  ruleset:
+    Controller:
+      - Middleware
+      - Requests
+      - Services
+
+    Middleware:
+      - Requests
+
+    Requests: []
+
+    Services:
+      - Repositories
+      - Models
+      - DTOs
+
+    Repositories:
+      - Models
+
+    Models: []
+
+    DTOs:
+      - Models
+
+    Jobs:
+      - Services
+
+    Events:
+      - Services
+      - Models
+
+    Listeners:
+      - Events
