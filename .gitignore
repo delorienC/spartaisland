@@ -4,3 +4,4 @@
 .phpunit.cache
 .Readme.md
 backend/.phpstorm.meta.php
+backend/test-filters
