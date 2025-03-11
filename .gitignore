@@ -1,8 +1,7 @@
 .history
 .vscode
 .devcontainer/devcontainer.json
-.phpunit.cache
-.Readme.md
-backend/.phpstorm.meta.php
-backend/test-filters
-backend/.debtrac.cache
+backend/test-filters/junit-log.xml
+.gitignore
+backend/test-filters/phpunit-log.xml
+backend/test-filters/test-results
