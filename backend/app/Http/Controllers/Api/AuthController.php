@@ -8,45 +8,36 @@ use App\Models\User;
 use App\Traits\ApiRespones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Sanctum\Sanctum;
 
 class AuthController extends Controller
 {
     use ApiRespones;
 
+    /**
+     * Handle an authentication attempt.
+     *
+     * @param LoginUserRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginUserRequest $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['error' => 'Invalid credentials 5678'], 401);
-        }
-        $user = User::firstWhere('email', $request->email);
-        $accessToken = $user->createToken('authToken')->plainTextToken;
-        $refreshToken = $user->createToken('refreshToken')->plainTextToken;
-        $user->update(['refresh_token' => $refreshToken]);
-        $cookie = cookie('refresh_token', $refreshToken, 60 * 24 * 7, '/', null, true, true);
-        return response()->json(['token' => $accessToken])->withCookie($cookie);
-    }
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    public function register(Request $request)
-    {
-        // Register the user
-        //return $this->ok('User registered successfully');
-    }
-
-    public function is_authenticated(Request $request)
-    {
-        $refreshToken = $request->header('X-Test-Token') ?? $request->cookie('refresh_token');
-
-        if ($refreshToken) {
-            $user = User::where('refresh_token', $refreshToken)->first();
-        }
-
-        if (!$refreshToken || !$user) {
+        if (!Auth::attempt($credentials)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
-
-        return response()->json([
-            'authenticated' => true
-        ]);
+        $user = Auth::user();
+        $expiresAt = now()->addMinutes(60);
+        $accessToken = $user->createToken('token')->plainTextToken;
+        return response()->json(
+            [
+                'token' => $accessToken,
+                'expires_at' => $expiresAt,
+            ]
+        );
     }
 }

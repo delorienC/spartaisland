@@ -1,19 +1,17 @@
-
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "../store"; 
 import { test, expect } from "vitest";
-import { TextEncoder, TextDecoder } from 'node:util';
 import Login from "../pages/Login";
 
-
-globalThis.TextEncoder = TextEncoder;
-globalThis.TextDecoder = (TextDecoder as any);
-
-test("Login form renders correctly and accepts inputs", () => {
+test("Login form renders correctly", () => {
   render(
-    <MemoryRouter>
-      <Login />
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>
+    </Provider>
   );
 
   // Check if email and password fields exist

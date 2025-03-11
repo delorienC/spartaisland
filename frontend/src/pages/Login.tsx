@@ -1,53 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setToken } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useAuthController } from "../controller/AuthController";
-import logo from '../assets/adminpanel-logo.png';
-
-
-
-const loginUser = async (email: string, password: string) => {
-  try {
-    const response = await fetch("https://localhost:443/api/login", {
-      method: "POST",
-      credentials: "include", // Important for Laravel Sanctum
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) {
-      return { error: "Invalid credentials" };
-    }
-    const data = await response.json();
-    localStorage.setItem("token", data.token);
-    return { success: "Login successful" };
-  } catch (error) {
-    return { error: "An error occurred while trying to log in " + error };
-  }
-};
+import logo from "../assets/adminpanel-logo.png";
 
 export default function Login() {
-  const navigate = useNavigate();
-  if (useAuthController()) {
-    //navigate("/admin-panel");
-    console.log("Already authenticated, redirecting to admin panel");
-  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const result = await loginUser(email, password);
+    const response = await fetch("https://localhost:443/api/login", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-    if (result.error) {
-      setStatus(result.error);
-    } else {
-      setStatus(result.success ?? null);
+    const data = await response.json();
+    if (response.ok) {
+      dispatch(setToken(data.token));
       navigate("/admin-panel");
+      localStorage.setItem("expires_at", data.expires_at);
+    } else {
+      console.error("Login failed", data);
     }
-
-    setLoading(false);
   };
   return (
     <>

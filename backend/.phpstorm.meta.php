@@ -2140,8 +2140,7 @@ namespace PHPSTORM_META {
 'cache.headers','can','guest','password.confirm','precognitive',
 'signed','throttle','verified',);
         registerArgumentsSet('routes', 
-'sanctum.csrf-cookie',
-'tickets.index','tickets.store','tickets.show','tickets.update','tickets.destroy','storage.local',);
+'sanctum.csrf-cookie','storage.local',);
         registerArgumentsSet('views', 
 'welcome','laravel-exceptions-renderer::components.card','laravel-exceptions-renderer::components.context','laravel-exceptions-renderer::components.editor','laravel-exceptions-renderer::components.header',
 'laravel-exceptions-renderer::components.icons.chevron-down','laravel-exceptions-renderer::components.icons.chevron-up','laravel-exceptions-renderer::components.icons.computer-desktop','laravel-exceptions-renderer::components.icons.moon','laravel-exceptions-renderer::components.icons.sun',
@@ -2192,8 +2191,7 @@ namespace PHPSTORM_META {
 'REDIS_PASSWORD','REDIS_PORT','MAIL_MAILER','MAIL_SCHEME','MAIL_HOST',
 'MAIL_PORT','MAIL_USERNAME','MAIL_PASSWORD','MAIL_FROM_ADDRESS','MAIL_FROM_NAME',
 'AWS_ACCESS_KEY_ID','AWS_SECRET_ACCESS_KEY','AWS_DEFAULT_REGION','AWS_BUCKET','AWS_USE_PATH_STYLE_ENDPOINT',
-'VITE_APP_NAME','APP_STORAGE','ADMIN_USER','ADMIN_FIRSTNAME','ADMIN_LASTNAME',
-'ADMIN_EMAIL','ADMIN_PASSWORD',);
+'VITE_APP_NAME','APP_STORAGE','ADMIN_NAME','ADMIN_EMAIL','ADMIN_PASSWORD',);
         
                 expectedArguments(\Illuminate\Support\Facades\Gate::has(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::allows(), 0, argumentsSet('auth'));

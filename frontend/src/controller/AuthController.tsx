@@ -10,7 +10,7 @@ export const useAuthController = () => {
     if (checked) return;
 
     let isMounted = true;
-
+    console.log("Checking auth");
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
       try {
