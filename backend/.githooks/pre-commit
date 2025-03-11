@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "Pre-Commit Hook runs!"
+
+cd "$(dirname "$0")/../../backend" || exit 1
+
+./vendor/bin/deptrac analyse
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo "Deptrac found violations! Aborting commit."
+  exit 1
+fi
