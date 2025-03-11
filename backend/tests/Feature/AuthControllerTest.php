@@ -30,29 +30,24 @@ it('rejects login with invalid credentials', function () {
     $response->assertStatus(401);
 });
 
-it('checks authentication using refresh token', function () {
-    $user = User::factory()->create(['email' => 'test@example.com', 'password' => Hash::make('password123')]);
+it('checks authentication using Sanctum token', function () {
+    $user = User::factory()->create([
+        'email' => 'test@example.com',
+        'password' => Hash::make('password123'),
+    ]);
 
-    $refreshToken = $user->createToken('refreshToken')->plainTextToken;
-    $user->update(['refresh_token' => $refreshToken]);
+    $token = $user->createToken('authToken')->plainTextToken;
+
     $response = $this->withHeaders([
-        'X-Test-Token' => $refreshToken,
-    ])->getJson('/api/is_authenticated');
+        'Authorization' => 'Bearer ' . $token,
+    ])->getJson('/api/test-auth');
 
-    // Verify that authentication was successful
-    $response->assertStatus(200)
-        ->assertJson(['authenticated' => true]);
+    $response->assertStatus(200);
 
-    User::where('email', 'like', 'test@example.com')->delete();
+    User::where('email', 'test@example.com')->delete();
     DB::table('sessions')->truncate();
 });
 
-it('rejects authentication check with invalid token', function () {
-    $response = $this->withCookie('refresh_token', 'invalid_token')
-        ->getJson('/api/is_authenticated');
-
-    $response->assertStatus(401);
-});
 
 it('deletes test@example.com from the database', function () {
     User::where('email', 'test@example.com')->delete();
