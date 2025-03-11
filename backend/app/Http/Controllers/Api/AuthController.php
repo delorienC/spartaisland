@@ -31,7 +31,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
         $user = Auth::user();
-        $expiresAt = now()->addMinutes(60);
+        $expiresAt = now()->addMinutes((int) env('TOKEN_MINUTES_EXPIRES', 60));
         $accessToken = $user->createToken('token')->plainTextToken;
         return response()->json(
             [
@@ -39,5 +39,11 @@ class AuthController extends Controller
                 'expires_at' => $expiresAt,
             ]
         );
+    }
+
+    public function logout(LoginUserRequest $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Token deleted']);
     }
 }
