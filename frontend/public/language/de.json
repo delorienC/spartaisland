@@ -1,0 +1,13 @@
+{
+  "adminPanel": {
+    "test": "Dies ist das Admin-Panel",
+    "welcome": "Willkommen im Admin-Panel"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "membership": "Mitgliedschaft",
+    "employees": "Mitarbeiter",
+    "exercises": "Übungen",
+    "workouts": "Workouts"
+  }
+}
