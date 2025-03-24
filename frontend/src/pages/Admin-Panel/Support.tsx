@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { checkTokenExpiration } from '../../api/tokenCheck'
 
-type Employee = {
+type Supports = {
   id: number
   name: string
 }
 
-const Employees = () => {
-  const [employees, setEmployees] = useState<Employee[]>([])
+const Support = () => {
+  const [Supports, setSupports] = useState<Supports[]>([])
 
   useEffect(() => {
     checkTokenExpiration()
-    const fetchEmployees = async () => {
+    const fetchSupports = async () => {
       try {
         const authData = localStorage.getItem('persist:auth')
         if (!authData) return
@@ -20,7 +20,7 @@ const Employees = () => {
         let token = parsedData.token?.replace(/"/g, '')
 
         const response = await axios.post(
-          'https://localhost:443/api/employees',
+          'https://localhost:443/api/defaults',
           {},
           {
             headers: {
@@ -31,23 +31,23 @@ const Employees = () => {
         )
 
         console.log('API Response:', response.data)
-        setEmployees(Array.isArray(response.data) ? response.data : [])
+        setSupports(Array.isArray(response.data) ? response.data : [])
       } catch (error) {
         console.error('API Error:', error)
       }
     }
 
-    fetchEmployees()
+    fetchSupports()
   }, [])
 
   return (
     <div>
       <div className="flex w-full flex-col p-6">
         <div className="card bg-base-300 rounded-box grid place-items-center p-4 m-4">
-          <h1 className="text-3xl font-bold">Employees</h1>
+          <h1 className="text-3xl font-bold">Supports</h1>
         </div>
         <div className="card bg-base-300 rounded-box grid place-items-center p-4 m-4">
-          <h1 className="text-2xl font-bold">List of Employees</h1>
+          <h1 className="text-2xl font-bold">List of Supports</h1>
           <div>
             <table className="table table-md">
               <thead>
@@ -57,10 +57,10 @@ const Employees = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((employee) => (
+                {Supports.map((Support) => (
                   <tr>
-                    <th>{employee.id}</th>
-                    <td>{employee.name}</td>
+                    <th>{Support.id}</th>
+                    <td>{Support.name}</td>
                   </tr>
                 ))}
               </tbody>
@@ -78,4 +78,4 @@ const Employees = () => {
   )
 }
 
-export default Employees
+export default Support

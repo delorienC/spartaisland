@@ -1,6 +1,6 @@
 //import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import NavigationList from './Navigation'
+import NavigationList from './DrawerNavigation'
 
 function Drawer() {
   return (

@@ -1,13 +1,17 @@
 {
+  "//": "This english word will be translated in german when we finish the project",
   "adminPanel": {
-    "test": "Dies ist das Admin-Panel",
-    "welcome": "Willkommen im Admin-Panel"
+    "test": "This is a Test",
+    "welcome": "Welcome"
   },
   "navigation": {
     "dashboard": "Dashboard",
-    "membership": "Mitgliedschaft",
-    "employees": "Mitarbeiter",
-    "exercises": "Übungen",
-    "workouts": "Workouts"
+    "employees": "Employee Management",
+    "roles": "Roles & Permissions ",
+    "settings": "System Settings",
+    "logs": "Logs & Activity",
+    "support": "Support Tickets",
+    "billing": "Subscriptions & Billing",
+    "backups": "Backups & Maintenance"
   }
 }

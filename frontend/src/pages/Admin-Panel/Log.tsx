@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { checkTokenExpiration } from '../../api/tokenCheck'
 
-type Employee = {
+type Logs = {
   id: number
   name: string
 }
 
-const Employees = () => {
-  const [employees, setEmployees] = useState<Employee[]>([])
+const Log = () => {
+  const [Logs, setLogs] = useState<Logs[]>([])
 
   useEffect(() => {
     checkTokenExpiration()
-    const fetchEmployees = async () => {
+    const fetchLogs = async () => {
       try {
         const authData = localStorage.getItem('persist:auth')
         if (!authData) return
@@ -20,7 +20,7 @@ const Employees = () => {
         let token = parsedData.token?.replace(/"/g, '')
 
         const response = await axios.post(
-          'https://localhost:443/api/employees',
+          'https://localhost:443/api/defaults',
           {},
           {
             headers: {
@@ -31,23 +31,23 @@ const Employees = () => {
         )
 
         console.log('API Response:', response.data)
-        setEmployees(Array.isArray(response.data) ? response.data : [])
+        setLogs(Array.isArray(response.data) ? response.data : [])
       } catch (error) {
         console.error('API Error:', error)
       }
     }
 
-    fetchEmployees()
+    fetchLogs()
   }, [])
 
   return (
     <div>
       <div className="flex w-full flex-col p-6">
         <div className="card bg-base-300 rounded-box grid place-items-center p-4 m-4">
-          <h1 className="text-3xl font-bold">Employees</h1>
+          <h1 className="text-3xl font-bold">Logs</h1>
         </div>
         <div className="card bg-base-300 rounded-box grid place-items-center p-4 m-4">
-          <h1 className="text-2xl font-bold">List of Employees</h1>
+          <h1 className="text-2xl font-bold">List of Logs</h1>
           <div>
             <table className="table table-md">
               <thead>
@@ -57,10 +57,10 @@ const Employees = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((employee) => (
+                {Logs.map((Log) => (
                   <tr>
-                    <th>{employee.id}</th>
-                    <td>{employee.name}</td>
+                    <th>{Log.id}</th>
+                    <td>{Log.name}</td>
                   </tr>
                 ))}
               </tbody>
@@ -78,4 +78,4 @@ const Employees = () => {
   )
 }
 
-export default Employees
+export default Log

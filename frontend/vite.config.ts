@@ -13,10 +13,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id: string) {
-          if (id.includes('node_modules') && !id.includes('react')) {
-            return 'vendor'
-          }
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          recharts: ['recharts'],
+          axios: ['axios'],
+          i18next: ['react-i18next'],
+          redux: ['react-redux'],
         },
       },
     },

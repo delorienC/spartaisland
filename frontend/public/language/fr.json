@@ -1,0 +1,14 @@
+{
+  "adminPanel": {
+    "test": "Ceci est un test",
+    "welcome": "Bienvenue"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "membership": "Adhésion",
+    "employees": "Employés",
+    "exercises": "Exercices",
+    "workouts": "Entraînements"
+  }
+}
+

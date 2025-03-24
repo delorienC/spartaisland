@@ -1,0 +1,13 @@
+{
+  "adminPanel": {
+    "test": "これはテストです",
+    "welcome": "ようこそ"
+  },
+  "navigation": {
+    "dashboard": "ダッシュボード",
+    "membership": "メンバーシップ",
+    "employees": "従業員",
+    "exercises": "エクササイズ",
+    "workouts": "ワークアウト"
+  }
+}
