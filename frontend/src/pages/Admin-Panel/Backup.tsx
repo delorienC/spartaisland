@@ -20,7 +20,7 @@ const Backup = () => {
         let token = parsedData.token?.replace(/"/g, '')
 
         const response = await axios.post(
-          'https://localhost:443/api/Backups',
+          'https://localhost:443/api/backups',
           {},
           {
             headers: {

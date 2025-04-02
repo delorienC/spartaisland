@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Employees;
 
 class EmployeesController extends Controller
 {
     public function index()
     {
-        return response()->json([
-            [
-                'id' => 1,
-                'name' => 'Employees',
-            ]
-        ]);
+        return Employees::all();
     }
 }

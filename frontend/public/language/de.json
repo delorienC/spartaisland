@@ -1,6 +1,7 @@
 {
   "//": "This english word will be translated in german when we finish the project",
   "adminPanel": {
+    "title": "Admin Panel",
     "test": "This is a Test",
     "welcome": "Welcome"
   },

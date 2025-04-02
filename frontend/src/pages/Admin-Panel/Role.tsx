@@ -20,7 +20,7 @@ const Role = () => {
         let token = parsedData.token?.replace(/"/g, '')
 
         const response = await axios.post(
-          'https://localhost:443/api/defaults',
+          'https://localhost:443/api/roles',
           {},
           {
             headers: {

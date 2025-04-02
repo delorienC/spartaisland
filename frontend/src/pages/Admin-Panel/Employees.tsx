@@ -5,6 +5,9 @@ import { checkTokenExpiration } from '../../api/tokenCheck'
 type Employee = {
   id: number
   name: string
+  email: string
+  email_verified_at: string
+  created_at: string
 }
 
 const Employees = () => {
@@ -48,12 +51,38 @@ const Employees = () => {
         </div>
         <div className="card bg-base-300 rounded-box grid place-items-center p-4 m-4">
           <h1 className="text-2xl font-bold">List of Employees</h1>
+          <div className="p-4">
+            <label className="input">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input type="search" className="grow" placeholder="Search" />
+              <kbd className="kbd kbd-sm">⌘</kbd>
+              <kbd className="kbd kbd-sm">K</kbd>
+            </label>
+          </div>
           <div>
             <table className="table table-md">
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Email</th>
+                  <th>Email verified at</th>
+                  <th>Created at</th>
                 </tr>
               </thead>
               <tbody>
@@ -61,6 +90,9 @@ const Employees = () => {
                   <tr>
                     <th>{employee.id}</th>
                     <td>{employee.name}</td>
+                    <td>{employee.email}</td>
+                    <td>{employee.email_verified_at}</td>
+                    <td>{employee.created_at}</td>
                   </tr>
                 ))}
               </tbody>
@@ -68,6 +100,9 @@ const Employees = () => {
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Email</th>
+                  <th>Email verified at</th>
+                  <th>Created at</th>
                 </tr>
               </tfoot>
             </table>
