@@ -38,6 +38,10 @@ class AuthController extends Controller
             [
                 'token' => $accessToken,
                 'expires_at' => $expiresAt,
+                'user' => [
+                    'name' => $user->name,
+                    'role' => $user->role,
+                ],
             ]
         );
     }

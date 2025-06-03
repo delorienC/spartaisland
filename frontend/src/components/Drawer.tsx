@@ -1,8 +1,12 @@
 //import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import NavigationList from './DrawerNavigation'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store'
 
 function Drawer() {
+  const user = useSelector((state: RootState) => state.user)
+
   return (
     <div className="drawer drawer-mobile drawer-open">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -22,7 +26,7 @@ function Drawer() {
         <div className="flex items-center space-x-3 p-4 w-60">
           <img alt="User" className="w-12 h-12 rounded-full" />
           <div>
-            <h3 className="text-lg font-semibold">Welcome John Doe</h3>
+            <h3 className="text-lg font-semibold">Welcome {user.name} </h3>
             <p className="text-sm text-gray-600">Admin-Panel</p>
           </div>
         </div>

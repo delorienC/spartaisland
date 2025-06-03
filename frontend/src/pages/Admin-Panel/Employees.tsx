@@ -1,3 +1,5 @@
+// filepath: frontend/src/pages/Admin-Panel/Employees.tsx
+
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { checkTokenExpiration } from '../../api/tokenCheck'
@@ -12,7 +14,12 @@ type Employee = {
 
 const Employees = () => {
   const [employees, setEmployees] = useState<Employee[]>([])
-
+  const [search, setSearch] = useState('')
+  const filteredEmployees = employees.filter(
+    (employee) =>
+      employee.name.toLowerCase().includes(search.toLowerCase()) ||
+      employee.email.toLowerCase().includes(search.toLowerCase())
+  )
   useEffect(() => {
     checkTokenExpiration()
     const fetchEmployees = async () => {
@@ -69,7 +76,13 @@ const Employees = () => {
                   <path d="m21 21-4.3-4.3"></path>
                 </g>
               </svg>
-              <input type="search" className="grow" placeholder="Search" />
+              <input
+                type="search"
+                className="grow"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
               <kbd className="kbd kbd-sm">⌘</kbd>
               <kbd className="kbd kbd-sm">K</kbd>
             </label>
@@ -86,7 +99,7 @@ const Employees = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((employee) => (
+                {filteredEmployees.map((employee) => (
                   <tr>
                     <th>{employee.id}</th>
                     <td>{employee.name}</td>

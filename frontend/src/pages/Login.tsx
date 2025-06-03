@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setToken } from '../store/authSlice'
+import { setUser } from '../store/userSlice'
 import { useNavigate } from 'react-router-dom'
 import logo from '../assets/adminpanel-logo.png'
 
@@ -24,8 +25,10 @@ export default function Login() {
     const data = await response.json()
     if (response.ok) {
       dispatch(setToken(data.token))
+      dispatch(setUser(data.user))
       navigate('/admin-panel')
       localStorage.setItem('expires_at', data.expires_at)
+      localStorage.setItem('user', JSON.stringify(data.user))
     } else {
       console.error('Login failed', data)
     }
