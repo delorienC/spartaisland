@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait ApiRespones
+trait ApiResponses
 {
     protected function ok($message, $data, $statusCode = 200)
     {
