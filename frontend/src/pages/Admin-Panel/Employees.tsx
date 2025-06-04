@@ -83,8 +83,6 @@ const Employees = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <kbd className="kbd kbd-sm">⌘</kbd>
-              <kbd className="kbd kbd-sm">K</kbd>
             </label>
           </div>
           <div>
@@ -96,16 +94,30 @@ const Employees = () => {
                   <th>Email</th>
                   <th>Email verified at</th>
                   <th>Created at</th>
+                  <th>Events</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredEmployees.map((employee) => (
-                  <tr>
+                  <tr
+                    className="even:bg-base-200 hover:bg-primary/20"
+                    key={employee.id}
+                  >
                     <th>{employee.id}</th>
                     <td>{employee.name}</td>
                     <td>{employee.email}</td>
                     <td>{employee.email_verified_at}</td>
                     <td>{employee.created_at}</td>
+                    <td>
+                      <button className="btn btn-soft btn-accent btn-xs">
+                        Send Password
+                      </button>
+                    </td>
+                    <td>
+                      <button className="btn btn-soft btn-error btn-xs">
+                        Block
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -116,6 +128,7 @@ const Employees = () => {
                   <th>Email</th>
                   <th>Email verified at</th>
                   <th>Created at</th>
+                  <th>Events</th>
                 </tr>
               </tfoot>
             </table>
