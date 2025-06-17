@@ -25,3 +25,4 @@ yarn-error.log
 /.phpstorm.meta.php
 /--filter*
 .debtrac.cache
+.gitignore
