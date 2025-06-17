@@ -5,3 +5,4 @@ backend/test-filters/junit-log.xml
 .gitignore
 backend/test-filters/phpunit-log.xml
 backend/test-filters/test-results
+backend/.debtrac.cache
