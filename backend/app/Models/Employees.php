@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\DataFormatHelper;
 
 class Employees extends Model
 {
@@ -11,7 +12,8 @@ class Employees extends Model
         "id",
         'name',
         'email',
-        'email_verified_at'
+        'email_verified_at',
+        'created_at',
     ];
 
     protected $hidden = [
@@ -19,4 +21,15 @@ class Employees extends Model
         'remember_token',
         'updated_at',
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return (new DataFormatHelper())->formatDate($value);
+    }
+
+    public function getEmailVerifiedAtAttribute($value)
+    {
+        return (new DataFormatHelper())->formatDate($value);
+    }
+
 }

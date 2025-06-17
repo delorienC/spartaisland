@@ -15,11 +15,16 @@ type Employee = {
 const Employees = () => {
   const [employees, setEmployees] = useState<Employee[]>([])
   const [search, setSearch] = useState('')
+  const [editId, setEditId] = useState<number | null>(null)
   const filteredEmployees = employees.filter(
     (employee) =>
       employee.name.toLowerCase().includes(search.toLowerCase()) ||
       employee.email.toLowerCase().includes(search.toLowerCase())
   )
+  const showEdit = (id: number) => {
+    console.log(`Edit employee with ID: ${id}`)
+    setEditId(id)
+  }
   useEffect(() => {
     checkTokenExpiration()
     const fetchEmployees = async () => {
@@ -99,26 +104,54 @@ const Employees = () => {
               </thead>
               <tbody>
                 {filteredEmployees.map((employee) => (
-                  <tr
-                    className="even:bg-base-200 hover:bg-primary/20"
-                    key={employee.id}
-                  >
-                    <th>{employee.id}</th>
-                    <td>{employee.name}</td>
-                    <td>{employee.email}</td>
-                    <td>{employee.email_verified_at}</td>
-                    <td>{employee.created_at}</td>
-                    <td>
-                      <button className="btn btn-soft btn-accent btn-xs">
-                        Send Password
-                      </button>
-                    </td>
-                    <td>
-                      <button className="btn btn-soft btn-error btn-xs">
-                        Block
-                      </button>
-                    </td>
-                  </tr>
+                  <>
+                    <tr
+                      className="even:bg-base-200 hover:bg-primary/20"
+                      key={employee.id}
+                    >
+                      <th>{employee.id}</th>
+                      <td>{employee.name}</td>
+                      <td>{employee.email}</td>
+                      <td>{employee.email_verified_at}</td>
+                      <td>{employee.created_at}</td>
+                      <td>
+                        <button
+                          className="btn btn-soft btn-accent btn-xs m-1"
+                          onClick={() => showEdit(employee.id)}
+                        >
+                          Edit
+                        </button>
+                        <button className="btn btn-soft btn-accent btn-xs m-1">
+                          Send Password
+                        </button>
+                        <button className="btn btn-soft btn-error btn-xs m-1">
+                          Block
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className={editId === employee.id ? '' : 'hidden'}>
+                      <td>Edit</td>
+                      <td>
+                        <input type="text" value={employee.name} />
+                      </td>
+                      <td>
+                        <input type="text" value={employee.email} />
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <button className="btn btn-soft btn-accent btn-xs m-2">
+                          Save
+                        </button>
+                        <button className="btn btn-soft btn-error btn-xs m-2">
+                          Cancel
+                        </button>
+                        <button className="btn btn-soft btn-error btn-xs m-2">
+                          Close
+                        </button>
+                      </td>
+                    </tr>
+                  </>
                 ))}
               </tbody>
               <tfoot>
